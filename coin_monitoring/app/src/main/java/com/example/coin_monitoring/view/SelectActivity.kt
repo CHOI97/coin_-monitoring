@@ -35,5 +35,7 @@ class SelectActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        viewModel.setUpFirstFlag()
     }
 }
