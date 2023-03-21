@@ -1,11 +1,13 @@
 package com.example.coin_monitoring.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.coin_monitoring.MainActivity
 import com.example.coin_monitoring.R
 import com.example.coin_monitoring.databinding.ActivitySelectBinding
 import com.example.coin_monitoring.view.adapter.SelectRVAdapter
@@ -29,5 +31,9 @@ class SelectActivity : AppCompatActivity() {
             Timber.d(it.toString())
         })
 
+        binding.laterTextArea.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
