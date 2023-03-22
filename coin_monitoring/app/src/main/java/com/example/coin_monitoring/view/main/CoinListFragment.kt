@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coin_monitoring.R
 import com.example.coin_monitoring.databinding.FragmentCoinListBinding
 import com.example.coin_monitoring.db.entity.InterestCoinEntity
+import com.example.coin_monitoring.view.adapter.CoinListRVAdapter
 import timber.log.Timber
 
 class CoinListFragment : Fragment() {
@@ -54,9 +56,18 @@ class CoinListFragment : Fragment() {
             }
             Timber.d(selectedList.toString())
             Timber.d(unSelectedList.toString())
+            setSelectedListRV()
         })
     }
+    private fun setSelectedListRV(){
+        val selectedRVAdapter = CoinListRVAdapter(requireContext(),selectedList)
+        binding.selectedCoinRV.adapter = selectedRVAdapter
+        binding.selectedCoinRV.layoutManager = LinearLayoutManager(requireContext())
 
+        val unSelectedRVAdapter = CoinListRVAdapter(requireContext(),unSelectedList)
+        binding.unSelectedCoinRV.adapter = unSelectedRVAdapter
+        binding.unSelectedCoinRV.layoutManager = LinearLayoutManager(requireContext())
+    }
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
