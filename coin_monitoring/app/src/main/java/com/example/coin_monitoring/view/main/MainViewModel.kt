@@ -6,6 +6,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.coin_monitoring.db.entity.InterestCoinEntity
 import com.example.coin_monitoring.repository.DBRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel: ViewModel(){
@@ -14,8 +15,20 @@ class MainViewModel: ViewModel(){
 
     lateinit var selectedCoinList : LiveData<List<InterestCoinEntity>>
 
+    // CoinListFragment
+
     fun getAllInterestCoinData() = viewModelScope.launch {
         val coinList = dbRepository.getAllInterestCoinData().asLiveData()
         selectedCoinList = coinList
     }
+
+    fun updateInterestCoinData(interestCoinEntity: InterestCoinEntity) = viewModelScope.launch(Dispatchers.IO) {
+        if(interestCoinEntity.selected){
+            interestCoinEntity.selected = false
+        }else{
+            interestCoinEntity.selected = true
+        }
+    }
+
+    // PriceChangeFragment
 }
