@@ -32,8 +32,10 @@ class SelectActivity : AppCompatActivity() {
         })
 
         binding.laterTextArea.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            viewModel.setUpFirstFlag()
+            viewModel.saveSelectedCoinList(selectRVAdapter.selectedCoinList)
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
         }
 
         viewModel.setUpFirstFlag()
