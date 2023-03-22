@@ -32,10 +32,17 @@ class SelectActivity : AppCompatActivity() {
         })
 
         binding.laterTextArea.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            viewModel.setUpFirstFlag()
+            viewModel.saveSelectedCoinList(selectRVAdapter.selectedCoinList)
+            // 만약 코인이 엄청 많을 경우에는? 일부만 저장되고 나머지가 저장이 안되었을 경우
+            // 다 저장되고 MainActivity 로 넘겨주는 방법?
+            // LiveData 를 사용하여 Observer 로 관찰
         }
-
-        viewModel.setUpFirstFlag()
+        viewModel.save.observe(this, Observer{
+            if(it.equals("done")){
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        })
     }
 }
