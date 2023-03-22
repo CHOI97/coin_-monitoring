@@ -5,13 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.coin_monitoring.MainActivity
-import com.example.coin_monitoring.R
+import com.example.coin_monitoring.view.main.MainActivity
 import com.example.coin_monitoring.databinding.ActivitySelectBinding
 import com.example.coin_monitoring.view.adapter.SelectRVAdapter
-import kotlinx.coroutines.selects.select
 import timber.log.Timber
 
 class SelectActivity : AppCompatActivity() {

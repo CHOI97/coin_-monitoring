@@ -7,8 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
-import com.example.coin_monitoring.MainActivity
-import com.example.coin_monitoring.R
+import com.example.coin_monitoring.view.main.MainActivity
 import com.example.coin_monitoring.databinding.ActivityIntroBinding
 import timber.log.Timber
 
@@ -34,7 +33,7 @@ class IntroActivity : AppCompatActivity() {
         viewModel.first.observe(this, Observer{
             if(it){
                 // 처음 접속하는 유저가 아님
-                val intent = Intent(this,MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }else{
                 // 처음 접속하는 유저
