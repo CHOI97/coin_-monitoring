@@ -28,6 +28,8 @@ class MainViewModel: ViewModel(){
         }else{
             interestCoinEntity.selected = true
         }
+
+        dbRepository.updateInterestCoinData(interestCoinEntity)
     }
 
     // PriceChangeFragment
