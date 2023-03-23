@@ -1,19 +1,35 @@
 package com.example.coin_monitoring.view.main
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.coin_monitoring.dataModel.UpDownDataSet
 import com.example.coin_monitoring.db.entity.InterestCoinEntity
 import com.example.coin_monitoring.repository.DBRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainViewModel: ViewModel(){
 
     private val dbRepository = DBRepository()
 
     lateinit var selectedCoinList : LiveData<List<InterestCoinEntity>>
+
+    // LiveData TimeStamp CoinPrice
+    private val _arr15min = MutableLiveData<List<UpDownDataSet>>()
+    val arr15min : LiveData<List<UpDownDataSet>>
+        get() = _arr15min
+
+    private val _arr30min = MutableLiveData<List<UpDownDataSet>>()
+    val arr30min : LiveData<List<UpDownDataSet>>
+        get() = _arr30min
+
+    private val _arr45min = MutableLiveData<List<UpDownDataSet>>()
+    val arr45min : LiveData<List<UpDownDataSet>>
+        get() = _arr45min
 
     // CoinListFragment
 
@@ -43,6 +59,9 @@ class MainViewModel: ViewModel(){
         // 1. 관심있다고 선택한 코인 리스트 가져오기
 
         val selectedCoinList = dbRepository.getAllInterestSelectedCoinData()
+        val arr15min = ArrayList<UpDownDataSet>()
+        val arr30min = ArrayList<UpDownDataSet>()
+        val arr45min = ArrayList<UpDownDataSet>()
 
         // 2. 관심있는 코인 리스트를 반복문을 통해 가져오기
         for(data in selectedCoinList){
@@ -57,18 +76,37 @@ class MainViewModel: ViewModel(){
                 // DB 값이 2개 이상
                 // 현재와 15분전 가격을 비교하려면 데이터가 2개 이상은 있어야함.
                 val changedPrice = oneCoinData[0].price.toDouble() - oneCoinData[1].price.toDouble()
+                val upDownDataSet = UpDownDataSet(
+                    coinName,
+                    changedPrice.toString()
+                )
+                arr15min.add(upDownDataSet)
             }
             if(size>2){
                 // DB 값이 3개 이상
                 // 30분전 가격은 데이터가 3개 이상
                 val changedPrice = oneCoinData[0].price.toDouble() - oneCoinData[2].price.toDouble()
+                val upDownDataSet = UpDownDataSet(
+                    coinName,
+                    changedPrice.toString()
+                )
+                arr30min.add(upDownDataSet)
             }
             if(size>3){
                 // DB 값이 4개 이상
                 // 45분전 가격은 데이터가 4개 이상
                 val changedPrice = oneCoinData[0].price.toDouble() - oneCoinData[3].price.toDouble()
+                val upDownDataSet = UpDownDataSet(
+                    coinName,
+                    changedPrice.toString()
+                )
+                arr45min.add(upDownDataSet)
             }
         }
-
+        withContext(Dispatchers.Main){
+            _arr15min.value = arr15min
+            _arr30min.value = arr30min
+            _arr45min.value = arr45min
+        }
     }
 }
