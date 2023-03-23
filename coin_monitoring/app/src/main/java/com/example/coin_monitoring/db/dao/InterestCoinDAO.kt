@@ -15,6 +15,7 @@ interface InterestCoinDAO {
     // Insert
     @Insert(onConflict =  OnConflictStrategy.IGNORE)
     fun insert(interestCoinEntity: InterestCoinEntity)
+
     // Update
     @Update
     fun update(interestCoinEntity: InterestCoinEntity)
