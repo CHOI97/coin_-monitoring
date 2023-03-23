@@ -24,7 +24,7 @@ class DBRepository {
     fun getAllInterestSelectedCoinData() = db.interestCoinDao().getSelectedData()
 
     // Coin Price
-    
+
     fun getAllCoinPriceData() = db.selectedCoinDao().getAllData()
 
     fun insertCoinPriceData(selectedCoinPriceEntity: SelectedCoinPriceEntity) = db.selectedCoinDao().insert(selectedCoinPriceEntity)
