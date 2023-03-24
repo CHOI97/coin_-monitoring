@@ -20,7 +20,7 @@ import timber.log.Timber
 
 class SelectViewModel : ViewModel() {
 
-    private val newWorkRepository = NetworkRepository()
+    private val networkRepository = NetworkRepository()
     private val dbRepository = DBRepository()
     private lateinit var currentPriceResultList: ArrayList<CurrentPriceResult>
 
@@ -33,7 +33,7 @@ class SelectViewModel : ViewModel() {
 
 
     fun getCurrentCoinList() = viewModelScope.launch {
-        val result = newWorkRepository.getCurrentCoinList()
+        val result = networkRepository.getCurrentCoinList()
         currentPriceResultList = ArrayList()
         for (coin in result.data) {
             try {
