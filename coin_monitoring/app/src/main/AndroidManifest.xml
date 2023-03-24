@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Coin_monitoring"
         tools:targetApi="31">
         <activity
-            android:name=".SettingActivity"
+            android:name=".view.setting.SettingActivity"
             android:exported="false"
             android:label="@string/title_activity_setting"
             android:theme="@style/Theme.Coin_monitoring.NoActionBar">
@@ -52,6 +52,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <service android:name=".service.PriceForegroundService"/>
     </application>
 
 </manifest>
