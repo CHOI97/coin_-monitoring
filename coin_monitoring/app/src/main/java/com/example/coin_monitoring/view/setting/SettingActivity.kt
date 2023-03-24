@@ -18,14 +18,13 @@ class SettingActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.startForeground.setOnClickListener {
-            Toast.makeText(this,"start",Toast.LENGTH_SHORT)
+            Toast.makeText(this,"start",Toast.LENGTH_SHORT).show()
             val intent = Intent(this, PriceForegroundService::class.java)
             intent.action = "START"
             startService(intent)
         }
         binding.stopForeground.setOnClickListener {
-            Toast.makeText(this,"stop",Toast.LENGTH_SHORT)
-
+            Toast.makeText(this,"stop",Toast.LENGTH_SHORT).show()
             val intent = Intent(this, PriceForegroundService::class.java)
             intent.action = "STOP"
             startService(intent)
