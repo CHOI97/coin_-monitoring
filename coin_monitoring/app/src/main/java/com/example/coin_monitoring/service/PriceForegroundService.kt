@@ -49,7 +49,7 @@ class PriceForegroundService : Service() {
                     stopForeground(true)
                     stopSelf()
                 }catch (e : java.lang.Exception){
-                    
+
                 }
 
             }
