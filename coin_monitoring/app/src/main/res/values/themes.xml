@@ -20,4 +20,13 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/graph</item>
         <item name="postSplashScreenTheme">@style/Theme.Coin_monitoring</item>
     </style>
+
+    <style name="Theme.Coin_monitoring.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Coin_monitoring.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Coin_monitoring.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
